@@ -3,7 +3,7 @@
     import { Hide } from "../Modal.js";
 	import Modal from "../Modal.svelte";
 
-	import {modalShown,modalPage,chatName,chatMembers,chatOwner,chatid,ulist,postClicked,profileClicked,search_mode,search_q,profileClicked_GC,spinner} from "../stores.js";
+	import {modalShown,uncensoredposts,modalPage,chatName,chatMembers,chatOwner,chatid,ulist,postClicked,profileClicked,search_mode,search_q,profileClicked_GC,spinner} from "../stores.js";
 </script>
 
 <Modal on:close={() => {$modalShown = false}}>
@@ -25,6 +25,7 @@
             search_q.set(e.target[8].value)
             profileClicked_GC.set(e.target[9].value)
             spinner.set(e.target[10].value == "true" && true || false)
+			uncensoredposts.set(e.target[11].value == "true" && true || false)
 
             Hide()
 		}}
@@ -32,7 +33,7 @@
 		<input
 			type="text"
 			class="white"
-			placeholder="Chat Name"
+			placeholder="Chat Name (String)"
 			autocomplete="false"
 			on:keydown={(event) => {
 				if (event.key == "Enter" && !shiftHeld) {
@@ -44,7 +45,7 @@
         <input
 			type="text"
 			class="white"
-			placeholder="Chat Members"
+			placeholder="Chat Members (JSON)"
 			autocomplete="false"
 			on:keydown={(event) => {
 				if (event.key == "Enter" && !shiftHeld) {
@@ -56,7 +57,7 @@
         <input
 			type="text"
 			class="white"
-			placeholder="Chat ID"
+			placeholder="Chat ID (String)"
 			autocomplete="false"
 			on:keydown={(event) => {
 				if (event.key == "Enter" && !shiftHeld) {
@@ -68,7 +69,7 @@
         <input
 			type="text"
 			class="white"
-			placeholder="Chat Owner"
+			placeholder="Chat Owner (String)"
 			autocomplete="false"
 			on:keydown={(event) => {
 				if (event.key == "Enter" && !shiftHeld) {
@@ -80,7 +81,7 @@
         <input
 			type="text"
 			class="white"
-			placeholder="Ulist"
+			placeholder="Ulist (JSON)"
 			autocomplete="false"
 			on:keydown={(event) => {
 				if (event.key == "Enter" && !shiftHeld) {
@@ -92,7 +93,7 @@
         <input
 			type="text"
 			class="white"
-			placeholder="Post Clicked"
+			placeholder="Post Clicked (JSON)"
 			autocomplete="false"
 			on:keydown={(event) => {
 				if (event.key == "Enter" && !shiftHeld) {
@@ -104,7 +105,7 @@
         <input
 			type="text"
 			class="white"
-			placeholder="Profile Clicked"
+			placeholder="Profile Clicked (String)"
 			autocomplete="false"
 			on:keydown={(event) => {
 				if (event.key == "Enter" && !shiftHeld) {
@@ -116,7 +117,7 @@
         <input
 			type="text"
 			class="white"
-			placeholder="Search Mode"
+			placeholder="Search Mode (String)"
 			autocomplete="false"
 			on:keydown={(event) => {
 				if (event.key == "Enter" && !shiftHeld) {
@@ -128,7 +129,7 @@
         <input
 			type="text"
 			class="white"
-			placeholder="Search Query"
+			placeholder="Search Query (String)"
 			autocomplete="false"
 			on:keydown={(event) => {
 				if (event.key == "Enter" && !shiftHeld) {
@@ -140,7 +141,7 @@
         <input
 			type="text"
 			class="white"
-			placeholder="Gc profile clicked"
+			placeholder="Gc profile clicked (String)"
 			autocomplete="false"
 			on:keydown={(event) => {
 				if (event.key == "Enter" && !shiftHeld) {
@@ -152,7 +153,19 @@
         <input
 			type="text"
 			class="white"
-			placeholder="Spinner"
+			placeholder="Spinner (Bool)"
+			autocomplete="false"
+			on:keydown={(event) => {
+				if (event.key == "Enter" && !shiftHeld) {
+					event.preventDefault();
+					document.getElementById("submitpost_st").click();
+				}
+			}}
+		>
+		<input
+			type="text"
+			class="white"
+			placeholder="Uncensored Posts (Bool)"
 			autocomplete="false"
 			on:keydown={(event) => {
 				if (event.key == "Enter" && !shiftHeld) {

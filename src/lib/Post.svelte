@@ -17,7 +17,8 @@
 		mainPage as page,
 		modalShown,
 		modalPage,
-		uncensoredposts
+		uncensoredposts,
+		DevMode
 	} from "../lib/stores.js";
 	import {shiftHeld} from "../lib/keyDetect.js";
 	import * as clm from "../lib/clmanager.js";
@@ -41,6 +42,10 @@
 		if (post.content.includes("****")) {
 			if (post.unfiltered_content != undefined) {
 				post.content = post.unfiltered_content
+			} else {
+				if (DevMode) {
+					post.content = post.content + " (Not actually censored)"
+				}
 			}
 		}
 	}

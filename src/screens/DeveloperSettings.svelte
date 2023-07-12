@@ -3,7 +3,7 @@
 <script>
 	import Container from "../lib/Container.svelte";
 
-	import {user, modalShown, modalPage, screen, setupPage, disconnected ,mainPage as page, groupcats} from "../lib/stores.js";
+	import {user,sidebarbypasses, modalShown, modalPage, screen, setupPage, disconnected ,mainPage as page, groupcats} from "../lib/stores.js";
 	import * as clm from "../lib/clmanager.js";
     import { tick } from "svelte";
     import { Show } from "../lib/Modal";
@@ -39,6 +39,23 @@
 <Container>
 	<h1>Developer Settings</h1>
 	These should only be used for development purposes.
+</Container>
+<Container>
+	<div class="settings-controls">
+		<input
+			type="checkbox"
+			checked={$sidebarbypasses}
+			on:change={() => {
+				let _user = $user
+				_user.lvl = 4
+				user.set(_user)
+				sidebarbypasses.set(!$sidebarbypasses)
+			}}
+		>
+	</div>
+
+	<h2>SideBar Bypass</h2>
+	Bypass all sidebar restrictions
 </Container>
 <Container>
 	<div class="settings-controls">

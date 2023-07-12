@@ -16,11 +16,14 @@
 <script>
 
     import loadProfile from "./loadProfile";
-    import {ulist,user,profileClicked, modalPage, modalShown, mainPage as page} from "./stores.js";
+    import {ulist,user, modalPage, modalShown, mainPage as page} from "./stores.js";
     import Loading from "./Loading.svelte";
     import Container from "./Container.svelte";
     import PFP from "./PFP.svelte";
     import { levels } from "./formatting";
+
+    export const ShowJoin = true
+    export const FromGC = false
 
     import { createEventDispatcher, tick } from 'svelte';
 	const dispatch = createEventDispatcher();
@@ -65,7 +68,7 @@
                     </div>
                 </div>
                 <div class="settings-controls">
-                    {#if $profileClicked === $user.name}
+                    {#if username === $user.name}
                         <button
                             class="circle settings"
                             on:click = {()=>{
@@ -82,17 +85,19 @@
                             }}
                         ></button>
                     {:else}
-                        <button
-                            class="circle join"
-                            on:click = {()=>{
-                                $modalPage = "CL_AddChat";
-					            $modalShown = true;
-                            }}
-                        ></button>
+                        {#if ShowJoin}
+                            <button
+                                class="circle join"
+                                on:click = {()=>{
+                                    $modalPage = "CL_AddChat";
+                                    $modalShown = true;
+                                }}
+                            ></button>
+                        {/if}
                         <button
                             class="circle report"
                             on:click = {()=>{
-                                $modalPage = "ReportUserModal";
+                                $modalPage = "reportUser";
 					            $modalShown = true;
                             }}
                         ></button>

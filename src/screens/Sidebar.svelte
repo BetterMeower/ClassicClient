@@ -9,7 +9,8 @@
 		chatid,
 		modalShown,
 		modalPage,
-		modPanelOpen
+		modPanelOpen,
+		sidebarbypasses
 	} from "../lib/stores.js";
 	import {shiftHeld} from "../lib/keyDetect.js";
 	
@@ -37,9 +38,11 @@
 	*/
 	function goto(newPage, resetScroll=true) {
 		if (!$user.name && newPage !== "home" && newPage !== "settings" && newPage !== "developersettings" && newPage !== "changelog" && newPage !== "search") {
-			modalPage.set("signup");
-			modalShown.set(true);
-			return;
+			if ($sidebarbypasses == false) {
+				modalPage.set("signup");
+				modalShown.set(true);
+				return;
+			}
 		}
 		if (resetScroll) {
 			window.scrollTo(0,0);

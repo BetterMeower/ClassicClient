@@ -40,7 +40,9 @@
 }
 
 body {
-    margin: 0;
+	margin: 0;
+	overflow: hidden;
+	background-color: #57e389;
 }
 
 #app, body, :root {
@@ -262,4 +264,21 @@ a {
 button.trash {
     background-image: url("./trash.svg");
     background-size: 56%;
+}
+
+.nojs {
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100vw;
+	height: 100vh;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	font-family: simvoni, sans-serif;
+	color: white;
+	font-weight: bold;
 }

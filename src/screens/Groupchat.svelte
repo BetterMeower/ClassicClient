@@ -18,6 +18,7 @@
 
 	import * as emoji from "node-emoji";
 
+	// @ts-ignore
 	import {autoresize} from "svelte-textarea-autoresize";
 
 	import {fly} from "svelte/transition";

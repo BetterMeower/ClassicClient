@@ -13,6 +13,7 @@
 	import ReportPostModal from "./lib/modals/ReportPost.svelte";
 	import ReportUserModal from "./lib/modals/ReportUser.svelte";
 	import GC_MemberModal from "./lib/modals/GC_Member.svelte";
+	import AddMemberUModal from "./lib/modals/AddMember_Username.svelte";
 	import AddMemberModal from "./lib/modals/AddMember.svelte";
 	import RemoveMemberModal from "./lib/modals/RemoveMember.svelte";
 	import CreateChatModal from "./lib/modals/CreateChat.svelte";
@@ -72,6 +73,7 @@ IS NEEDED FOR THE TRANSITION TO WORK
 	class:mode-dark={$user.mode === false}
 
 	class:layout-old={$user.layout === "old"}
+	class:layout-new={$user.layout === "new"}
 	class:layout-mobile={$mobile}
 >
 	{#if $modPanelOpen}
@@ -169,6 +171,8 @@ IS NEEDED FOR THE TRANSITION TO WORK
 			<DeleteAccountModal />
 		{:else if $modalPage === "GC_Member"}
 			<GC_MemberModal />
+		{:else if $modalPage === "AddMember_User"}
+			<AddMemberUModal />
 		{:else if $modalPage === "AddMember"}
 			<AddMemberModal />
 		{:else if $modalPage === "removeMember"}

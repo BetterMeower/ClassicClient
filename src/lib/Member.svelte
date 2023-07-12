@@ -22,7 +22,7 @@
 			pfp = (await loadProfile(member)).pfp_data;
 		} catch(e) {
 			error = e;
-			pfp = -2
+			pfp = -1
 		}
 	};
 	onMount(initPostUser);

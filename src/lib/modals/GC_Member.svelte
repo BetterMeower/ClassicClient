@@ -1,28 +1,22 @@
 <script>	
 	import Modal from "../Modal.svelte";
-    import Container from "../Container.svelte";
-    import PFP from "../PFP.svelte";
-    import Loading from "../Loading.svelte";
 
     import * as clm from "../clmanager.js";
 
 	import {
 		modalShown, modalPage, 
 		profileClicked_GC, 
-		ulist, user, profileClicked, 
+		user, profileClicked, 
 		mainPage as page, 
 		chatid, chatOwner
 	} from "../stores.js";
-    import {levels} from "../formatting.js";
-
-	import {default as loadProfile} from "../loadProfile.js";
     import ProfileView from "../Profile_View.svelte";
 </script>
 
 <Modal on:close={() => {$modalShown = false}}>
     <h2 slot="header">{$profileClicked_GC}'s Profile</h2>
     <div slot="default">
-		<ProfileView username={$profileClicked_GC}></ProfileView>
+		<ProfileView username={$profileClicked_GC} FromGC={true}></ProfileView>
 		<button class="long" on:click={() => {
 			$modalShown = false
 			clm.meowerRequest({
@@ -53,35 +47,4 @@
         margin: 0;
 		margin-bottom: -2px;
     }
-
-	.profile-header-info {
-		margin-left: 1em;
-		height: 6em;
-	}
-
-    .profile-active {
-        font-style: italic;
-    }
-
-    .profile-role {
-        position: absolute;
-        font-size: 90%;
-    }
-
-	.profile-username {
-		margin: 0;
-		display: inline-block;
-		max-width: 100%;
-		font-size: 3em;
-	}
-
-	.profile-header {
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
-	}
-
-	.center {
-		text-align: center;
-	}
 </style>

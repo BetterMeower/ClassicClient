@@ -91,3 +91,10 @@ export const groupcats = writable(200)
 // TODO: Make a system to load the var's settings or whateber
 
 export const uncensoredposts = writable(true)
+
+// Dev settings
+
+export const sidebarbypasses = writable(false)
+
+// Check if running in dev mode
+export const DevMode = import.meta.env.DEV
