@@ -17,6 +17,7 @@
 		mainPage as page,
 		modalShown,
 		modalPage,
+		uncensoredposts
 	} from "../lib/stores.js";
 	import {shiftHeld} from "../lib/keyDetect.js";
 	import * as clm from "../lib/clmanager.js";
@@ -24,6 +25,7 @@
 	import {default as loadProfile, profileCache} from "../lib/loadProfile.js";
 
 	import {onMount, tick} from "svelte";
+    import Loading from "./Loading.svelte";
 
 	export let post = {};
 	export let buttons = true;
@@ -34,6 +36,12 @@
 	let webhook = false;
 
 	let images = [];
+
+	if (post.content.includes("****")) {
+		if (post.unfiltered_content != undefined) {
+			post.content = post.unfiltered_content
+		}
+	}
 
 	// IP grabber sites exist, and I don't know if hosting a proxy is feasible
 	// WARNING: Put a / at the end of each URL so it can't be bypassed
@@ -214,7 +222,7 @@
 						? post.user === "Server"
 							? 102
 							: post.post_origin === "inbox" &&
-							  (post.user === "Announcement" ||
+							(post.user === "Announcement" ||
 									post.user === "Notification" ||
 									post.user.startsWith("Notification to"))
 							? 101
@@ -272,7 +280,7 @@
 			{/if}
 		</div>
 	</div>
-    {#if post.content.search(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i) != -1}
+	{#if post.content.search(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i) != -1}
         <br>
         <ReplyPost post={post.content.split(" ").splice(1, 1)[0].replace("[", "").replace("]", "")} />
 	    <p class="post-content">{post.content.split(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i).join(" ")}</p>
@@ -281,8 +289,8 @@
     {/if}
 	<div class="post-images">
 		{#each images as { title, url }}
-			<a href={url} target="_blank" rel="noreferrer"
-				><img src={url} alt={title} {title} class="post-image" />
+			<a href={url} target="_blank" rel="noreferrer">
+				<img src={url} alt={title} {title} class="post-image" />
 			</a>
 		{/each}
 	</div>

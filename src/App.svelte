@@ -118,8 +118,8 @@ IS NEEDED FOR THE TRANSITION TO WORK
 				<div class="modal-buttons">
 					<button on:click={async () => {
 						if (shiftHeld) {
-							localStorage.setItem("meower_linkurl","wss://botserver.bettermeower.app/")
-							localStorage.setItem("meower_apiurl","https://botserverapi.bettermeower.app/")
+							localStorage.removeItem("meower_linkurl")
+							localStorage.removeItem("meower_apiurl")
 							cljs.disconnect()
 							await tick();
 							location.reload()

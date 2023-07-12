@@ -282,7 +282,7 @@
 	</div>
 
 	<h2>Reset server URLS</h2>
-	Reset API and server URL's
+	Reset API and server URL's (You can also do this by pressing shift on the disconnect modal)
 </Container>
 <Container>
 	<div class="settings-controls">

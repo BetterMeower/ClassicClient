@@ -95,6 +95,7 @@
 						post_id: post.post_id,
 						user: post.u,
 						content: post.p,
+						unfiltered_content: post.unfiltered_p,
 						date: post.t.e,
 					});
 				}
@@ -147,6 +148,7 @@
 				addPost({
 					post_id: cmd.val._id,
 					user: cmd.val.u,
+					unfiltered_content: cmd.val.unfiltered_p,
 					content: cmd.val.p,
 					date: cmd.val.t.e,
 				});

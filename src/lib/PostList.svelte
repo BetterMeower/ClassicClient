@@ -124,6 +124,7 @@
 				post_id: post.post_id,
 				user: post.u,
 				content: post.p,
+				unfiltered_content: post.unfiltered_p,
 				date: post.t.e,
 				post_origin: post.post_origin,
 				isDeleted: post.isDeleted,
@@ -159,6 +160,8 @@
 		const evId = clm.link.on("direct", cmd => {
 			if (!cmd.val) return;
 
+			console.log(cmd.val)
+
 			const isGC = postOrigin !== "home";
 			if (cmd.val.mode === "delete") {
 				items = items.filter(post => post.post_id !== cmd.val.id);
@@ -171,6 +174,7 @@
 					post_id: cmd.val._id,
 					user: cmd.val.u,
 					content: cmd.val.p,
+					unfiltered_content: cmd.val.unfiltered_p,
 					date: cmd.val.t.e,
 					post_origin: cmd.val.post_origin,
 					isDeleted: cmd.val.isDeleted,
@@ -182,6 +186,7 @@
 					post_id: "",
 					user: "Server",
 					content: `${cmd.val.u} left ${chatName}.`,
+					unfiltered_content: `You should not see this`,
 					date: Date.now() / 1000,
 					post_origin: postOrigin || fetchUrl,
 					isDeleted: false,
@@ -193,6 +198,7 @@
 					post_id: "",
 					user: "Server",
 					content: `${cmd.val.u} joined ${chatName}!`,
+					unfiltered_content: `You should not see this`,
 					date: Date.now() / 1000,
 					post_origin: postOrigin || fetchUrl,
 					isDeleted: false,

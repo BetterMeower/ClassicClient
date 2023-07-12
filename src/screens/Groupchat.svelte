@@ -4,7 +4,7 @@
 -->
 
 <script>
-	import {auth_header, user, chatName, chatMembers, chatid, ulist, spinner, mainPage as page, modalShown, modalPage, profileClicked_GC, lastTyped} from "../lib/stores.js";
+	import {auth_header, user, chatName, chatOwner,  chatMembers, chatid, ulist, spinner, mainPage as page, modalShown, modalPage, profileClicked_GC, lastTyped} from "../lib/stores.js";
 	import {shiftHeld} from "../lib/keyDetect.js";
     import {playNotification} from "../lib/sounds.js";
 	import Post from "../lib/Post.svelte";
@@ -106,6 +106,7 @@
 						id: id++,
 						post_id: post.post_id,
 						user: post.u,
+						unfiltered_content: post.unfiltered_p,
 						content: post.p,
 						date: post.t.e,
 					});
@@ -154,6 +155,7 @@
 				addPost({
 					post_id: cmd.val._id,
 					user: cmd.val.u,
+					unfiltered_content: cmd.val.unfiltered_p,
 					content: cmd.val.p,
 					date: cmd.val.t.e,
 				});
@@ -344,7 +346,7 @@
 						modalShown.set(true);
 						profileClicked_GC.set(chatmember);
 					}}>
-						<Member member={chatmember} />
+						<Member member={chatmember} crown={$chatOwner === chatmember} />
 					</button>
 				{/each}
 			</div>

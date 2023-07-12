@@ -6,6 +6,7 @@
 	import {onMount} from "svelte";
 	import loadProfile from "./loadProfile.js";
 	export let member = "";
+	export let crown = false;
 
 	let pfp = 0;
 
@@ -38,14 +39,22 @@
 			></PFP>
 		</div>
 		<p class="member-name">{member}</p>
+		{#if crown}
+			<img alt="crown" src="src/assets/crown.svg" class="owner-icon" />
+		{/if}
 	</div>
 {:else if error == "Error: response code not OK; code 404"}
 	<div class="error">Chat member "{member}" isn't a valid Meower username. Check your spelling and try again.</div>
 {:else}
- <div class="error">Error loading chat member {member} because of "{error}"</div>
+ 	<div class="error">Error loading chat member {member} because of "{error}"</div>
 {/if}
 
 <style>
+
+	.owner-icon {
+		height: 60%;
+	}
+
 	.member {
 		display: flex;
 		flex-wrap: nowrap;

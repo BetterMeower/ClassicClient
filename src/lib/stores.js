@@ -85,3 +85,9 @@ export const spinner = writable(false);
 export const windowStyle = writable({});
 
 export const groupcats = writable(200)
+
+// Session settings
+
+// TODO: Make a system to load the var's settings or whateber
+
+export const uncensoredposts = writable(true)
