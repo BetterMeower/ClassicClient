@@ -63,38 +63,40 @@
 {:then data}
 		<ProfileView username={$profileClicked} on:pfpClicked={togglePfpSwitcher}></ProfileView>
 
-		{#if pfpSwitcher}
-			<Container>
-				<h2>Profile Picture</h2>
-				<div id="pfp-list">
-					{#each pfps as pfp}
-						<span
-							on:click={() => {
-								pfpSwitcher = false;
-								$user.pfp_data = pfp;
-								save();
-							}}
-							class="pfp"
-							class:selected={$user.pfp_data === pfp}
-						><PFP
-							online={false}
-							icon={pfp}
-							alt="Profile picture {pfp}"
-						></PFP></span>
-					{/each}
-				</div>
-				<!--<button
+		{#if $user.name === $profileClicked}
+			{#if pfpSwitcher}
+				<Container>
+					<h2>Profile Picture</h2>
+					<div id="pfp-list">
+						{#each pfps as pfp}
+							<span
+								on:click={() => {
+									pfpSwitcher = false;
+									$user.pfp_data = pfp;
+									save();
+								}}
+								class="pfp"
+								class:selected={$user.pfp_data === pfp}
+							><PFP
+								online={false}
+								icon={pfp}
+								alt="Profile picture {pfp}"
+							></PFP></span>
+						{/each}
+					</div>
+					<!--<button
+						class="long"
+						title="Close Profile Picture Changer"
+						on:click={() => pfpSwitcher = false}
+					>Close</button>-->
+				</Container>
+			<!--{:else if $profileClicked === $user.name}
+				<button
 					class="long"
-					title="Close Profile Picture Changer"
-					on:click={() => pfpSwitcher = false}
-				>Close</button>-->
-			</Container>
-		<!--{:else if $profileClicked === $user.name}
-			<button
-				class="long"
-				title="Change Profile Picture"
-				on:click={() => pfpSwitcher = true}
-			>Change Profile Picture</button>-->
+					title="Change Profile Picture"
+					on:click={() => pfpSwitcher = true}
+				>Change Profile Picture</button>-->
+			{/if}
 		{/if}
 
 		{#if data.quote}

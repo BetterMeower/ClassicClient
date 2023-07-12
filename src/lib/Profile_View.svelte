@@ -3,6 +3,7 @@
 
     TO DEVLOPERS: USE THIS NOT THE CONTENTS
     TO WHOEVER ADDED THIS: THANK YOU FOR MAKING MY JOB HARDER -ARROW
+    It was me - bloctans
 
     import: import ProfileView from "../lib/Profile_View.svelte";
     example usage: <ProfileView username={$profileClicked}></ProfileView>

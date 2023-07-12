@@ -37,9 +37,11 @@
 
 	let images = [];
 
-	if (post.content.includes("****")) {
-		if (post.unfiltered_content != undefined) {
-			post.content = post.unfiltered_content
+	if ($uncensoredposts == true) {
+		if (post.content.includes("****")) {
+			if (post.unfiltered_content != undefined) {
+				post.content = post.unfiltered_content
+			}
 		}
 	}
 
@@ -325,9 +327,7 @@
 		margin: 0;
 		overflow-wrap: anywhere;
 	}
-	:global(main.input-hover) .pfp:hover:not(:active) :global(.pfp),
-	:global(main.input-touch) .pfp:active :global(.pfp),
-	.pfp:focus-visible :global(.pfp) {
+	.pfp:hover:not(:active), .pfp:focus-visible {
 		transform: scale(1.1);
 	}
 	.post-content {
