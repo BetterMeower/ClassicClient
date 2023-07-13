@@ -14,6 +14,7 @@
 	import ReportUserModal from "./lib/modals/ReportUser.svelte";
 	import GC_MemberModal from "./lib/modals/GC_Member.svelte";
 	import AddMemberUModal from "./lib/modals/AddMember_Username.svelte";
+	import AddMemberSModal from "./lib/modals/AddMember_Search.svelte";
 	import AddMemberModal from "./lib/modals/AddMember.svelte";
 	import RemoveMemberModal from "./lib/modals/RemoveMember.svelte";
 	import CreateChatModal from "./lib/modals/CreateChat.svelte";
@@ -34,6 +35,7 @@
 	import SearchModal from "./lib/modals/Search.svelte";
 	import Chatlist_AddChatModal from "./lib/modals/Chatlist_AddChat.svelte";
 	import ChangeStoreModal from "./lib/modals/ChangeStore.svelte";
+	import SearchResultsUModal from "./lib/modals/SearchResultU.svelte";
 
 	import {mobile} from "./lib/responsiveness.js";
 	import Spinner from "./lib/Spinner.svelte";
@@ -173,6 +175,8 @@ IS NEEDED FOR THE TRANSITION TO WORK
 			<GC_MemberModal />
 		{:else if $modalPage === "AddMember_User"}
 			<AddMemberUModal />
+		{:else if $modalPage === "AddMember_Search"}
+			<AddMemberSModal />
 		{:else if $modalPage === "AddMember"}
 			<AddMemberModal />
 		{:else if $modalPage === "removeMember"}
@@ -199,6 +203,8 @@ IS NEEDED FOR THE TRANSITION TO WORK
 			<Chatlist_AddChatModal />
 		{:else if $modalPage === "Change_store"}
 			<ChangeStoreModal />
+		{:else if $modalPage === "SearchResults_User"}
+			<SearchResultsUModal />
 		{:else}
 			<ErrorModal />
 		{/if}

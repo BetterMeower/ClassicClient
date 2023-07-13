@@ -16,7 +16,7 @@
 <Modal on:close={() => {$modalShown = false}}>
     <h2 slot="header">{$profileClicked_GC}'s Profile</h2>
     <div slot="default">
-		<ProfileView username={$profileClicked_GC} FromGC={true}></ProfileView>
+		<ProfileView username={$profileClicked_GC}></ProfileView>
 		<button class="long" on:click={() => {
 			$modalShown = false
 			clm.meowerRequest({

@@ -16,14 +16,14 @@
 <script>
 
     import loadProfile from "./loadProfile";
-    import {ulist,user, modalPage, modalShown, mainPage as page} from "./stores.js";
+    import {ulist,user, modalPage, modalShown,chatid, chatMembers, mainPage as page, profileClicked} from "./stores.js";
     import Loading from "./Loading.svelte";
     import Container from "./Container.svelte";
     import PFP from "./PFP.svelte";
     import { levels } from "./formatting";
+    import * as clm from "./clmanager.js";
 
-    export const ShowJoin = true
-    export const FromGC = false
+    export let JoinGC = false;
 
     import { createEventDispatcher, tick } from 'svelte';
 	const dispatch = createEventDispatcher();
@@ -68,39 +68,59 @@
                     </div>
                 </div>
                 <div class="settings-controls">
-                    {#if username === $user.name}
+                    {#if JoinGC}
                         <button
-                            class="circle settings"
+                            class="circle join"
                             on:click = {()=>{
-                                window.scrollTo(0,0);
-					            page.set("blank");
-					            tick().then(() => page.set("settings"));
-                            }}
-                        ></button>
-                        <button
-                            class="circle leave"
-                            on:click = {()=>{
-                                $modalPage = "logout";
-					            $modalShown = true;
+                                clm.meowerRequest({
+                                    cmd: "direct", 
+                                    val: {
+                                        cmd: "add_to_chat", 
+                                        val: {chatid: $chatid, username: username}
+                                    }
+                                });
+                                $chatMembers.push(username)
+                                chatMembers.set($chatMembers);
+                                $modalShown = false;
                             }}
                         ></button>
                     {:else}
-                        {#if ShowJoin}
+                        {#if username === $user.name}
+                            {#if !JoinGC}
+                                <button
+                                    class="circle settings"
+                                    on:click = {()=>{
+                                        window.scrollTo(0,0);
+                                        page.set("blank");
+                                        tick().then(() => page.set("settings"));
+                                    }}
+                                ></button>
+                            {/if}
+                            <button
+                                class="circle leave"
+                                on:click = {()=>{
+                                    $modalPage = "logout";
+                                    $modalShown = true;
+                                }}
+                            ></button>
+                        {:else}
                             <button
                                 class="circle join"
                                 on:click = {()=>{
+                                    profileClicked.set(username)
                                     $modalPage = "CL_AddChat";
                                     $modalShown = true;
                                 }}
                             ></button>
+                            <button
+                                class="circle report"
+                                on:click = {()=>{
+                                    profileClicked.set(username) // Garbage hacky fix
+                                    $modalPage = "reportUser";
+                                    $modalShown = true;
+                                }}
+                            ></button>
                         {/if}
-                        <button
-                            class="circle report"
-                            on:click = {()=>{
-                                $modalPage = "reportUser";
-					            $modalShown = true;
-                            }}
-                        ></button>
                     {/if}
                 </div>
             </div>
