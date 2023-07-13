@@ -36,6 +36,7 @@
 	import Chatlist_AddChatModal from "./lib/modals/Chatlist_AddChat.svelte";
 	import ChangeStoreModal from "./lib/modals/ChangeStore.svelte";
 	import SearchResultsUModal from "./lib/modals/SearchResultU.svelte";
+	import AddImageModal from "./lib/modals/AddImage.svelte";
 
 	import {mobile} from "./lib/responsiveness.js";
 	import Spinner from "./lib/Spinner.svelte";
@@ -205,6 +206,8 @@ IS NEEDED FOR THE TRANSITION TO WORK
 			<ChangeStoreModal />
 		{:else if $modalPage === "SearchResults_User"}
 			<SearchResultsUModal />
+		{:else if $modalPage === "addImg"}
+			<AddImageModal />
 		{:else}
 			<ErrorModal />
 		{/if}

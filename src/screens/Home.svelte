@@ -4,7 +4,7 @@
 -->
 
 <script>
-	import {auth_header, ulist, spinner, lastTyped, mainPage as page, modalPage, modalShown, disconnected, user} from "../lib/stores.js";
+	import {auth_header, ulist, postInput as postInput_2, spinner, lastTyped, mainPage as page, modalPage, modalShown, disconnected, user} from "../lib/stores.js";
 	import {shiftHeld} from "../lib/keyDetect.js";
 	import Post from "../lib/Post.svelte";
 	import Container from "../lib/Container.svelte";
@@ -12,6 +12,7 @@
 	import TypingIndicator from "../lib/TypingIndicator.svelte";
 	import {link} from "../lib/clmanager.js";
 	import {apiUrl, encodeApiURLParams} from "../lib/urls.js";
+	import * as Modals from "../lib/Modal.js";
 
 	import * as emoji from "node-emoji";
 
@@ -364,6 +365,15 @@
 				}}
 				bind:this={postInput}
 			></textarea>
+			<button
+				class="upload-image"
+				name="addImage"
+				title="Add an image"
+				on:click|preventDefault={() => {
+					postInput_2.set(postInput);
+					Modals.Show("addImg");
+				}}>+</button
+			>
 			<button id="submitpost">Post</button>
 		</form>
 		<div class="post-errors">{postErrors}</div>
@@ -432,7 +442,7 @@
 		width: 100%;
 		margin-bottom: 1.88em;
 	}
-	input[type="checkbox"], button.circle {
+	button.circle {
 		border: none;
 		margin: 0;
 		margin-left: 0.125em;

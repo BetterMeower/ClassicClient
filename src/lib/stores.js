@@ -51,6 +51,9 @@ export const profileClicked = writable("");
 //Unused for now.
 export const Webhooks_pfp = writable("");
 
+// Image adding stuff
+export const postInput = writable();
+
 // Searching
 export const search_q = writable("");
 export const search_mode = writable("");
