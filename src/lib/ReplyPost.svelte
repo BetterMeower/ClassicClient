@@ -37,12 +37,12 @@
 		}
 
 		if ($uncensoredposts == true) {
-			if (post.content.includes("****")) {
-				if (post.unfiltered_content != undefined) {
-					post.content = post.unfiltered_content
+			if (json.p.includes("****")) {
+				if (json.unfiltered_p != undefined) {
+					json.p = json.unfiltered_p
 				} else {
 					if (DevMode) {
-						post.content = post.content + " (Not actually censored)"
+						json.p = json.p + " (Not actually censored)"
 					}
 				}
 			}
