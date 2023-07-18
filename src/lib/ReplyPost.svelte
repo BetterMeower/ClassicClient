@@ -37,7 +37,7 @@
 </script>
 
 <Container>
-    {#await fetch(`${apiUrl}posts?id=${post}`,{headers: {"Authorization":$auth_header}}).then(res => res.json())}
+    {#await fetch(`${apiUrl}posts?id=${post}`,{headers: {"Authorization": $auth_header}}).then(res => res.json())}
         <span class="loading">
             <span class="circle circle1"></span>
             <span class="circle circle2"></span>

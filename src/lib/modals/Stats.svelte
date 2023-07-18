@@ -21,7 +21,7 @@
 				<Loading />
 			</div>
 		{:then}
-			<p>There are {(stats.posts / 1000).toFixed(2)}K+ Posts, {stats.chats} Chats and {(stats.users / 1000).toFixed(2)}K+ users</p>
+			<p>There are {(stats.posts / 1000).toFixed(2)}K+ Posts, {(stats.chats / 1000).toFixed(2)}K Chats and {(stats.users / 1000).toFixed(2)}K+ users</p>
 		{/await}
 	</div>
 </Modal>
