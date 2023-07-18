@@ -5,7 +5,7 @@
 </script>
 
 <Modal on:close={() => {$modalShown = false}}>
-    <h2 slot="header">Set Theme</h2>
+    <h2 slot="header">Classic Theme Picker</h2>
     <div slot="default" class="grid">
         <button id="fix" style="margin-right: 4px;" on:click={() => {
             const _user = $user;

@@ -1,7 +1,7 @@
 <script>
 	import Modal from "../Modal.svelte";
 
-	import {modalShown, user} from "../stores.js";
+	import {modalShown, user,modalPage} from "../stores.js";
 	import * as clm from "../clmanager.js";
 
 	import * as Modals from "../Modal.js";
@@ -109,7 +109,7 @@
 			</p>
 		{/if}
 		<p class="layout-text">(Change the layout in the settings.)</p>
-		<button class="long">Open Classic Theme Picker</button>
+		<button class="long" on:click={() => {modalPage.set("theme")}}>Open Classic Theme Picker</button>
 		<br><br>
 		<div class="modal-buttons">
 			<button

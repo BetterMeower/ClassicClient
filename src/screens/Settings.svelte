@@ -62,7 +62,7 @@
 		<button
 			class="circle settings"
 			on:click={()=>{
-				$modalPage = "theme";
+				$modalPage = "SwitchTheme";
 				$modalShown = true;
 			}}
 		></button>
@@ -70,24 +70,6 @@
 
 	<h2>Theme</h2>
 	The theme is currently set to {$user.theme}.
-</Container>
-<Container>
-	<div class="settings-controls">
-		<input
-			type="checkbox"
-			checked={!$user.mode}
-			on:change={()=>{
-				const _user = $user;
-				_user.mode = !_user.mode;
-				user.set(_user);
-
-				clm.updateProfile();
-			}}
-		>
-	</div>
-
-	<h2>Dark Mode</h2>
-	Dark mode is currently {$user.mode ? "disabled" : "enabled"}.
 </Container>
 <Container>
 	<div class="settings-controls">

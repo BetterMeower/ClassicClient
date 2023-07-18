@@ -22,7 +22,7 @@
 	import ChangePasswordModal from "./lib/modals/ChangePassword.svelte";
 	import DeleteAccountModal from "./lib/modals/DeleteAccount.svelte";
 	import LogoutModal from "./lib/modals/Logout.svelte";
-	import ThemeModal from "./lib/modals/Theme.svelte";
+	import ClassicThemeModal from "./lib/modals/ClassicTheme.svelte";
 	import CustomThemeModal from "./lib/modals/CustomTheme.svelte";
 	import ErrorModal from "./lib/modals/Error.svelte";
 	import StatsModal from "./lib/modals/Stats.svelte";
@@ -186,7 +186,7 @@ IS NEEDED FOR THE TRANSITION TO WORK
 		{:else if $modalPage === "logout"}
 			<LogoutModal />
 		{:else if $modalPage === "theme"}
-			<ThemeModal />
+			<ClassicThemeModal />
 		{:else if $modalPage === "ctheme"}
 			<CustomThemeModal />
 		{:else if $modalPage === "WH_agree"}
