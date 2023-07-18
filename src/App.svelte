@@ -37,6 +37,7 @@
 	import ChangeStoreModal from "./lib/modals/ChangeStore.svelte";
 	import SearchResultsUModal from "./lib/modals/SearchResultU.svelte";
 	import AddImageModal from "./lib/modals/AddImage.svelte";
+	import SwitchThemeModal from "./lib/modals/SwitchTheme.svelte";
 
 	import {mobile} from "./lib/responsiveness.js";
 	import Spinner from "./lib/Spinner.svelte";
@@ -208,6 +209,8 @@ IS NEEDED FOR THE TRANSITION TO WORK
 			<SearchResultsUModal />
 		{:else if $modalPage === "addImg"}
 			<AddImageModal />
+		{:else if $modalPage === "SwitchTheme"}
+			<SwitchThemeModal />
 		{:else}
 			<ErrorModal />
 		{/if}
