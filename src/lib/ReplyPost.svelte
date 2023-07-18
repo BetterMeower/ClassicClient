@@ -37,7 +37,18 @@
 </script>
 
 <Container>
-    {#await fetch(`${apiUrl}posts?id=${post}`,{headers: {"Authorization": $auth_header}}).then(res => res.json())}
+    {#await 
+		fetch(
+			`${apiUrl}posts?id=${post}`,
+			{
+				headers: {
+					Authorization: `${$auth_header}`
+				}
+			}
+		).then(
+			res => res.json()
+		)
+	}
         <span class="loading">
             <span class="circle circle1"></span>
             <span class="circle circle2"></span>
@@ -45,31 +56,35 @@
             <b class="text">Loading...</b>
         </span>
     {:then info}
-        {#if info.p.includes(":") ||
-            info.u === "Discord" ||
-            info.u === "revolt" ||
-            info.u === "Revower"
-        }
-            <span><b>{info.p.split(": ")[0]}</b> {info.p.slice(info.p.indexOf(": ") + 1)}</span>
-        {:else}
-			{#if info.p.search(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i) != -1}
-				{#if ShowMoreButton}
-					{#if !_ShowMore}
-						<button class="full" on:click={() => {_ShowMore = true}}>Show Full reply chain</button>
-						<br>
-						<br>
-					{/if}
-					{#if _ShowMore}
+		{#if info.isDeleted}
+			<span><b>Deleted Message</b></span>
+		{:else}
+			{#if info.p.includes(":") ||
+				info.u === "Discord" ||
+				info.u === "revolt" ||
+				info.u === "Revower"
+			}
+				<span><b>{info.p.split(": ")[0]}</b> {info.p.slice(info.p.indexOf(": ") + 1)}</span>
+			{:else}
+				{#if info.p.search(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i) != -1}
+					{#if ShowMoreButton}
+						{#if !_ShowMore}
+							<button class="full" on:click={() => {_ShowMore = true}}>Show Full reply chain</button>
+							<br>
+							<br>
+						{/if}
+						{#if _ShowMore}
+							<ReplyPost post={info.p.split(" ").splice(1, 1)[0].replace("[", "").replace("]", "")} ShowMoreButton = {false}  />
+						{/if}
+					{:else}
 						<ReplyPost post={info.p.split(" ").splice(1, 1)[0].replace("[", "").replace("]", "")} ShowMoreButton = {false}  />
 					{/if}
+					<span><b>{info.u}</b> {info.p.split(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i).join(" ")}</span>
 				{:else}
-					<ReplyPost post={info.p.split(" ").splice(1, 1)[0].replace("[", "").replace("]", "")} ShowMoreButton = {false}  />
+					<span><b>{info.u}</b> {info.p}</span>
 				{/if}
-				<span><b>{info.u}</b> {info.p.split(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i).join(" ")}</span>
-			{:else}
-				<span><b>{info.u}</b> {info.p}</span>
 			{/if}
-        {/if}
+		{/if}
     {:catch error}
         <span><b>Error fetching post:</b> <code>{error}</code></span>
     {/await}
