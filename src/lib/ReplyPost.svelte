@@ -41,9 +41,7 @@
 		fetch(
 			`${apiUrl}posts?id=${post}`,
 			{
-				headers: {
-					Authorization: `${$auth_header}`
-				}
+				headers: $auth_header
 			}
 		).then(
 			res => res.json()
