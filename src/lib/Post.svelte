@@ -255,11 +255,9 @@
 			{/if}
 		</div>
 	</div>
-	{#if post.content.search(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i) != -1}
-		{#if post.origin == "home"}
-			<br>
-        	<ReplyPost _post={post.content.split(" ").splice(1, 1)[0].replace("[", "").replace("]", "")} />
-	    {/if}
+	{#if post.content.search(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i) != -1 && post.origin == "home"}
+		<br>
+        <ReplyPost _post={post.content.split(" ").splice(1, 1)[0].replace("[", "").replace("]", "")} />
 		<p class="post-content">{post.content.split(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i).join(" ")}</p>
     {:else}
         <p class="post-content">{post.content}</p>

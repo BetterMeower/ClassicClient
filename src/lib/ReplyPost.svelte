@@ -106,8 +106,6 @@
 
 		if (!webhook) loadProfile(post.user);
     }
-
-    onMount(initPostUser);
 </script>
 
 <Container>
