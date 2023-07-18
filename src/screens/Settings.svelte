@@ -5,8 +5,8 @@
 
 	import {user, modalShown, modalPage, setupPage,
 		screen,
-		disconnectReason,
-        disconnected} from "../lib/stores.js";
+		disconnectReason, 
+		uncensoredposts, disconnected} from "../lib/stores.js";
 	import * as clm from "../lib/clmanager.js";
     import { tick } from "svelte";
 </script>
@@ -131,11 +131,26 @@
 	<p>Options for imgbb</p>
 </Container>-->
 <hr>
-<!--<Container>
+<Container>
 	<h1>Session Settings</h1>
 	You can change settings that only apply for this device here. These do not sync with your account.
 </Container>
 <Container>
+	<div class="settings-controls">
+		<input
+			type="checkbox"
+			checked={$uncensoredposts}
+			on:change={()=>{
+				uncensoredposts.set(localStorage.getItem("UncensorPosts") == "false")
+				localStorage.setItem("UncensorPosts", (localStorage.getItem("UncensorPosts") == "false").toString())
+			}}
+		>
+	</div>
+
+	<h2>Uncensor Posts</h2>
+	Uncensoring posts is currently {(localStorage.getItem("UncensorPosts") == "false") ? "disabled" : "enabled"}.
+</Container>
+<!--<Container>
 	<div class="settings-controls">
 		<button
 			class="circle settings"

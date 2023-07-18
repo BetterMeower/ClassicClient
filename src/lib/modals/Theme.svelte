@@ -63,6 +63,22 @@
 			clm.updateProfile();
         }}>Purple</button>
 
+        <br>
+
+        <button style="margin-right: 4px; margin-top: 4px;" on:click={() => {
+            const _user = $user;
+            _user.mode = true;
+            user.set(_user);
+            clm.updateProfile();
+        }}>Light</button>
+
+        <button style="margin-right: 4px; margin-top: 4px;" on:click={() => {
+            const _user = $user;
+            _user.mode = false;
+            user.set(_user);
+            clm.updateProfile();
+        }}>Dark</button>
+
         <!-- <button on:click={() => {
             modalPage.set("ctheme");
         }}>Custom Theme</button> -->

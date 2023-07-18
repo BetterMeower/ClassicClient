@@ -10,7 +10,7 @@
 
 	const themePreviews = import.meta.glob("../../assets/themePreviews/*.png", { import: 'default', eager: true,});
 
-	let selections = ["orange", "dark-orange", "blue", "dark-blue"];
+	let selections = ["orange", "dark-orange", "blue", "dark-blue","green","dark-green","magenta","dark-magenta","red","dark-red","pink","dark-pink","gray","dark-gray","purple","dark-purple"];
 
 	let error = false;
 
@@ -28,6 +28,7 @@
 	let darkModeStr = (!darkMode && "Light") || "Dark";
 	let themeCaps = theme.slice(0, 1).toUpperCase() + theme.slice(1);
 	let themeName = themeCaps + darkModeStr;
+	let BmTheme = ""
 
     /**
      * @type {string}
@@ -37,13 +38,25 @@
 		themePreviews["../../assets/themePreviews/" + themeName + ".png"] || defaultPreview;
 
 	function changeTheme() {
-		selection = clamp(selection, 0, 3);
+		if (selection < 0) {
+			selection = selections.length - 1
+		} else if (selection > selections.length - 1) {
+			selection = 0
+		}
+		
+		selection = clamp(selection, 0, selections.length-1);
 		theme = selections[selection];
         darkMode = false;
         if (theme.startsWith("dark-")) {
             darkMode = true;
             theme = theme.substring(5);
         }
+
+		if (selection > 3) {
+			BmTheme = " (BM Only, Won't Work on Vanilla)"
+		} else {
+			BmTheme = ""
+		}
 
 		darkModeStr = darkMode ? "Dark" : "Light";
 		themeCaps = theme.slice(0, 1).toUpperCase() + theme.slice(1);
@@ -80,7 +93,7 @@
 					alt={themeName}
 				/>
 				<div class="theme-name">
-					{themeCaps + " (" + darkModeStr + ")"}
+					{themeCaps + " (" + darkModeStr + ")" + BmTheme}
 				</div>
 			</div>
 			<button
@@ -96,6 +109,8 @@
 			</p>
 		{/if}
 		<p class="layout-text">(Change the layout in the settings.)</p>
+		<button class="long">Open Classic Theme Picker</button>
+		<br><br>
 		<div class="modal-buttons">
 			<button
 				on:click={() => {
@@ -149,5 +164,9 @@
 		text-align: center;
         margin: 0.75em 0;
         font-size: 80%;
+	}
+
+	.long {
+		width:100%;
 	}
 </style>

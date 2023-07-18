@@ -91,9 +91,13 @@ export const groupcats = writable(200)
 
 // Session settings
 
-// TODO: Make a system to load the var's settings or whateber
+if (localStorage.getItem("UncensorPosts") == null) {
+	localStorage.setItem("UncensorPosts", "false")
+}
 
 export const uncensoredposts = writable(true)
+
+uncensoredposts.set(localStorage.getItem("UncensorPosts") == "true")
 
 // Dev settings
 
