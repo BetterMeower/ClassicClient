@@ -109,6 +109,7 @@
 						user: post.u,
 						unfiltered_content: post.unfiltered_p,
 						content: post.p,
+						origin: post.post_origin,
 						date: post.t.e,
 					});
 				}
@@ -158,6 +159,7 @@
 					user: cmd.val.u,
 					unfiltered_content: cmd.val.unfiltered_p,
 					content: cmd.val.p,
+					origin: cmd.val.post_origin,
 					date: cmd.val.t.e,
 				});
 				postOffset++;
@@ -172,6 +174,7 @@
 					post_id: id++,
 					user: "Server",
 					content: `${cmd.val.u} left ${$chatName}.`,
+					origin: "Not home",
 					date: new Date().getTime()/1000,
 				});
             }
@@ -181,6 +184,7 @@
 					post_id: id++,
 					user: "Server",
 					content: `${cmd.val.u} joined ${$chatName}!`,
+					origin: "Not home",
 					date: new Date().getTime()/1000,
 				});
             }

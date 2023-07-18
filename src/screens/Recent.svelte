@@ -80,6 +80,7 @@
 						post_id: post.post_id,
 						user: post.u,
 						content: post.p,
+						origin: post.post_origin,
 						date: post.t.e,
 					});
 				}

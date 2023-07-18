@@ -90,6 +90,7 @@
 						post_id: post.post_id,
 						user: post.u,
 						content: post.p,
+						origin: "Not home",
 						date: post.t.e,
 					});
 				}

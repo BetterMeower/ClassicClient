@@ -2,21 +2,61 @@
 <script>
 	import Container from "./Container.svelte";
     import {apiUrl} from "./urls.js";
-	import {auth_header} from "./stores.js"
+	import {auth_header,uncensoredposts,DevMode} from "./stores.js"
+	import { IMAGE_HOST_WHITELIST } from "./hostWhitelist.js";
+
+	import {default as loadProfile, profileCache} from "../lib/loadProfile.js";
 
 	import ReplyPost from "./ReplyPost.svelte"
 
 	import {onMount, tick} from "svelte";
 
-	export let post;
+	export let _post;
 	export let ShowMoreButton = true
 
+	let images = [];
+
 	let _ShowMore = false
+
+	async function help() {
+		const res = await fetch(
+			`${apiUrl}posts?id=${_post}`,
+			{
+				headers: $auth_header
+			}
+		)
+		const json = await res.json()
+
+		let post = {
+			post_id: json.post_id,
+			content: json.p,
+			unfiltered_content: json.unfiltered_p,
+			user: json.u,
+			origin: json.post_origin,
+			date: json.t.e,
+		}
+
+		if ($uncensoredposts == true) {
+			if (post.content.includes("****")) {
+				if (post.unfiltered_content != undefined) {
+					post.content = post.unfiltered_content
+				} else {
+					if (DevMode) {
+						post.content = post.content + " (Not actually censored)"
+					}
+				}
+			}
+		}
+
+		initPostUser(post)
+
+		return json
+	}
 
 	let bridged = false
 	let webhook = false
 
-    function initPostUser() {
+    function initPostUser(post) {
         if (!post.user) return;
 
 		if (post.content.includes(":")) {
@@ -31,6 +71,40 @@
 			post.user = post.content.split(": ")[0];
 			post.content = post.content.slice(post.content.indexOf(": ") + 1);
 		}
+
+		// Match image syntax
+		// ([title: https://url])
+		const iterator = post.content.matchAll(
+			/\[([^\]]+?): (https:\/\/[^\]]+?)\]/gs
+		);
+		images = [];
+		while (true) {
+			const result = iterator.next();
+			if (result.done) break;
+
+			try {
+				new URL(result.value[2]);
+			} catch (e) {
+				continue;
+			}
+
+			if (
+				!IMAGE_HOST_WHITELIST.some(o =>
+					result.value[2].toLowerCase().startsWith(o.toLowerCase())
+				)
+			)
+				return;
+
+			images.push({
+				title: result.value[1],
+				url: result.value[2],
+			});
+			// Prevent flooding
+			if (images.length >= 3) break;
+		}
+		images = images;
+
+		if (!webhook) loadProfile(post.user);
     }
 
     onMount(initPostUser);
@@ -38,14 +112,7 @@
 
 <Container>
     {#await 
-		fetch(
-			`${apiUrl}posts?id=${post}`,
-			{
-				headers: $auth_header
-			}
-		).then(
-			res => res.json()
-		)
+		help()
 	}
         <span class="loading">
             <span class="circle circle1"></span>
@@ -72,15 +139,26 @@
 							<br>
 						{/if}
 						{#if _ShowMore}
-							<ReplyPost post={info.p.split(" ").splice(1, 1)[0].replace("[", "").replace("]", "")} ShowMoreButton = {false}  />
+							<ReplyPost _post={info.p.split(" ").splice(1, 1)[0].replace("[", "").replace("]", "")} ShowMoreButton = {false}  />
 						{/if}
 					{:else}
-						<ReplyPost post={info.p.split(" ").splice(1, 1)[0].replace("[", "").replace("]", "")} ShowMoreButton = {false}  />
+						<ReplyPost _post={info.p.split(" ").splice(1, 1)[0].replace("[", "").replace("]", "")} ShowMoreButton = {false}  />
 					{/if}
 					<span><b>{info.u}</b> {info.p.split(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i).join(" ")}</span>
 				{:else}
 					<span><b>{info.u}</b> {info.p}</span>
 				{/if}
+			{/if}
+			{#if images.length > 0}
+				<br>
+				<br>
+				<div class="post-images">
+					{#each images as { title, url }}
+						<a href={url} target="_blank" rel="noreferrer">
+							<img src={url} alt={title} {title} class="post-image" />
+						</a>
+					{/each}
+				</div>
 			{/if}
 		{/if}
     {:catch error}
@@ -122,6 +200,17 @@
 
 	.full {
 		width:100%;
+	}
+
+	.post-image {
+		max-height: 12em;
+		max-width: 100%;
+	}
+
+	.post-images {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25em;
 	}
 
 	@keyframes jump {

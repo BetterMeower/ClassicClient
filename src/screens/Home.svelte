@@ -97,6 +97,7 @@
 						user: post.u,
 						content: post.p,
 						unfiltered_content: post.unfiltered_p,
+						origin: post.post_origin,
 						date: post.t.e,
 					});
 				}
@@ -151,6 +152,7 @@
 					user: cmd.val.u,
 					unfiltered_content: cmd.val.unfiltered_p,
 					content: cmd.val.p,
+					origin: cmd.val.post_origin,
 					date: cmd.val.t.e,
 				});
 				postOffset++;
