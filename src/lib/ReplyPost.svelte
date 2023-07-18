@@ -43,7 +43,13 @@
         }
             <span><b>{info.p.split(": ")[0]}</b> {info.p.slice(info.p.indexOf(": ") + 1)}</span>
         {:else}
-            <span><b>{info.u}</b> {info.p.split(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i).join(" ")}</span>
+			{#if post.content.search(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i) != -1}
+				<br>
+				<ReplyPost post={post.content.split(" ").splice(1, 1)[0].replace("[", "").replace("]", "")} />
+				<span><b>{info.u}</b> {info.p.split(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i).join(" ")}</span>
+			{:else}
+				<span><b>{info.u}</b> {info.p}</span>
+			{/if}
         {/if}
     {:catch error}
         <span><b>Error fetching post:</b> <code>{error}</code></span>
