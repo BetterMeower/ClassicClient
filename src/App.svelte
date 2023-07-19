@@ -54,7 +54,7 @@
     import {i18n_config} from "./lib/i18n.js";
 
     onMount(() => {
-        i18n_config(((localStorage.getItem("language") ? localStorage.getItem("language") : navigator.language.split("-")[0]));
+        i18n_config((localStorage.getItem("language") ? localStorage.getItem("language") : navigator.language.split("-")[0]));
     });
 
 	// let notificationRequest = Notification.requestPermission();
