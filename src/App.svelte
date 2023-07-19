@@ -3,7 +3,7 @@
 <script>
 	import Main from "./screens/Main.svelte";
 	import Setup from "./screens/Setup.svelte";
-	
+
 	import Modal from "./lib/Modal.svelte";
 	import LoginModal from "./lib/modals/Login.svelte";
 	import SignupModal from "./lib/modals/Signup.svelte";
@@ -51,11 +51,17 @@
     import SetQuote from "./lib/modals/SetQuote.svelte";
     import ModPanel from "./lib/ModPanel.svelte";
 
+    import {i18n_config} from "./lib/i18n.js";
+
+    onMount(() => {
+        i18n_config("en");
+    });
+
 	// let notificationRequest = Notification.requestPermission();
 </script>
 
 <!--
-the line "class:layout-new={$user.layout === "new"}" 
+the line "class:layout-new={$user.layout === "new"}"
 IS NEEDED FOR THE TRANSITION TO WORK
 -->
 

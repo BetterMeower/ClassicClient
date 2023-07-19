@@ -28,5 +28,10 @@
     "Reconnect": ["Se reconnecter"],
     "Online": ["En ligne"],
     "Offline": ["Déconnecté"],
-    "Banned": ["Interdit"]
+    "Banned": ["Interdit"],
+    "User": ["Utilisateur"],
+    "Low-level Moderator": ["Bas-niveau Modérateur"],
+    "Moderator": ["Modérateur"],
+    "Administrator": ["Administrateur"],
+    "Sysadmin": ["Administrateur système"]
 }

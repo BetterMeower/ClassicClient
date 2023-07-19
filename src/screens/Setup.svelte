@@ -41,16 +41,14 @@
 	let rememberMe = false;
 	let acceptTerms = false;
 
-	onMount(async () => {
-        i18n_config((localStorage.getItem("language") ? localStorage.getItem("language") : navigator.language.split("-")[0]));
-
+	onMount(() => {
 		page.subscribe(async value => {
 			if (!setup) return;
 			const _user = $user;
 			_user.mode = !_user.mode;
 			_user.theme = "green";
 			console.log("Setup page loaded sucessfully!")
-			
+
 
 			setup.classList.remove("white");
 			if (value === "logo") {
@@ -61,7 +59,7 @@
 				setup.classList.add("white");
 				logoImg.height = 0;
 				logo.classList.remove("top");
-				
+
 				await sleep(600);
 				// Directly changing image height instead
 				// of using transforms to prevent blur
@@ -104,7 +102,7 @@
 
 	/**
 	 * Logs in.
-	 * 
+	 *
 	 * @param {string} username
 	 * @param {string} password
 	*/
@@ -251,7 +249,7 @@
 	{:else if $page === "login"}
 		<div class="fullcenter">
 			<h1>Login to BetterMeower</h1>
-			
+
 			<form class="column-ui"
 				on:submit|preventDefault={e => {
 					if (!(e.target[0].value && e.target[1].value)) {
@@ -330,7 +328,7 @@
 							auth_header.set({username: val.payload.username, token: val.payload.token});
 
 							loginStatus = "";
-							
+
 							if (rememberMe) {
 								localStorage.setItem("meower_savedusername", username);
 								localStorage.setItem("meower_savedpassword", val.payload.token);
@@ -432,12 +430,12 @@
 		font-size: 150%;
 
 		text-align: center;
-		
+
 		position: absolute;
 		top: 0;
 		left: 0;
 		z-index: 1000;
-		
+
 		width: 100%;
 		min-height: 100vh;
 		height: 100%;

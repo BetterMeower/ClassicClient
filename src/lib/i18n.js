@@ -2,6 +2,7 @@
 import Jed from "jed";
 
 export async function i18n_config(language) {
+    console.log("init");
     const data = {
         "en": await fetch(
                 new URL(
@@ -17,5 +18,8 @@ export async function i18n_config(language) {
             ).then(res => res.json())
     };
 
-    window.i18n = new Jed({ "locale_data": data, "domain": (language in data ? language : "en") });
+    window.i18n = new Jed({
+        "locale_data": data,
+        "domain": (language in data ? language : "en")
+    });
 }
