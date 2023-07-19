@@ -2,7 +2,6 @@
 import Jed from "jed";
 
 export async function i18n_config(language) {
-    console.log("init");
     const data = {
         "en": await fetch(
                 new URL(
