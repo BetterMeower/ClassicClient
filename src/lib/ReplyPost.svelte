@@ -1,6 +1,7 @@
-<!-- A post. Profile pictures not appearing while not logged in is intentional. -->
+<!-- A reply. -->
 <script>
 	import Container from "./Container.svelte";
+    import PFP from "./PFP.svelte";
     import {apiUrl} from "./urls.js";
 	import {auth_header,uncensoredposts,DevMode} from "./stores.js"
 	import { IMAGE_HOST_WHITELIST } from "./hostWhitelist.js";
@@ -160,7 +161,10 @@
 			{/if}
 		{/if}
     {:catch error}
-        <span><b>Error fetching post:</b> <code>{error}</code></span>
+        <span>
+            <b>Error fetching post:</b>
+            <code>{error}</code>
+        </span>
     {/await}
 </Container>
 
