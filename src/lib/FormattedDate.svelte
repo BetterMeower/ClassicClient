@@ -19,22 +19,22 @@
 
     	if (elapsed < msPerMinute) {
 			if (1 < Math.round(elapsed/1000)) {
-            	return window.i18n.sprintf(window.i18n.ngettext("1 second ago", "1 second ago", 0), Math.round(elapsed/1000));
+            	return window.i18n.sprintf(window.i18n.ngettext("1 second ago", "1 second ago", 1), Math.round(elapsed/1000));
         	} else if (Math.round(elapsed/1000) == 0 || `${Math.round(elapsed/1000)}`.startsWith("-")) {
 				return window.i18n.gettext("just now");
 			} else {
             	return window.i18n.gettext("1 second ago");
         	}  
     	} else if (elapsed < msPerHour) {
-        	return window.i18n.sprintf(window.i18n.ngettext("1 minute ago", "1 minute ago", 0), Math.round(elapsed/msPerMinute));
+        	return window.i18n.sprintf(window.i18n.ngettext("1 minute ago", "1 minute ago", 1), Math.round(elapsed/msPerMinute));
     	} else if (elapsed < msPerDay) {
-        	return window.i18n.sprintf(window.i18n.ngettext("1 hour ago", "1 hour ago", 0), Math.round(elapsed/msPerHour));  
+        	return window.i18n.sprintf(window.i18n.ngettext("1 hour ago", "1 hour ago", 1), Math.round(elapsed/msPerHour));  
     	} else if (elapsed < msPerMonth) {
-            return window.i18n.sprintf(window.i18n.ngettext("1 day ago", "1 day ago", 0), Math.round(elapsed/msPerDay));
+            return window.i18n.sprintf(window.i18n.ngettext("1 day ago", "1 day ago", 1), Math.round(elapsed/msPerDay));
     	} else if (elapsed < msPerYear) {
-            return window.i18n.sprintf(window.i18n.ngettext("1 day ago", "1 day ago", 0), Math.round(elapsed/msPerMonth));
+            return window.i18n.sprintf(window.i18n.ngettext("1 day ago", "1 day ago", 1), Math.round(elapsed/msPerMonth));
     	} else {
-            return window.i18n.sprintf(window.i18n.ngettext("1 year ago", "1 year ago", 0), Math.round(elapsed/msPerYear));
+            return window.i18n.sprintf(window.i18n.ngettext("1 year ago", "1 year ago", 1), Math.round(elapsed/msPerYear));
     	}
 	}
 	 
