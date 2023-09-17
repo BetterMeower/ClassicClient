@@ -33,5 +33,11 @@
     "Low-level Moderator": ["Low-level Moderator"],
     "Moderator": ["Moderator"],
     "Administrator": ["Administrator"],
-    "Sysadmin": ["Sysadmin"]
+    "Sysadmin": ["Sysadmin"],
+    "Log in": ["Log in"],
+    "Create a account": ["Create a account"],
+    "Skip": ["Skip"],
+    "Log in to BetterMeower": ["Log in to BetterMeower"],
+    "Create a Meower account": ["Create a Meower account"],
+    "Go back": ["Go back"]
 }
