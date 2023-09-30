@@ -216,8 +216,8 @@
 					/>
 					<br /><br />
 				</div>
-				<button on:click={() => page.set("login")}>Log in</button>
-				<button on:click={() => page.set("join")}>Create an account</button>
+				<button on:click={() => page.set("login")}>{window.i18n.gettext("Log in")}</button>
+				<button on:click={() => page.set("join")}>{window.i18n.gettext("Create an account")}</button>
 				{#if localStorage.getItem("meower_savedusername")}
 					<button on:click={() => {
 						rememberMe = true;
@@ -225,7 +225,7 @@
 							localStorage.getItem("meower_savedusername"),
 							localStorage.getItem("meower_savedpassword"),
 						)
-					}}>Use saved login ({localStorage.getItem("meower_savedusername")})</button>
+					}}>{window.i18n.gettext("Use saved login (%d)", localStorage.getItem("meower_savedusername"))}</button>
 					<p class="small">{loginStatus}</p>
 				{/if}
 				<button on:click={() => {
@@ -233,11 +233,11 @@
 					page.set("blank");
 					screen.set("main");
 					console.warn("User skipped login, serveral features will be unavailable");
-				}}>Skip</button>
-				<p class="small">(Several features will be unavailable while not logged in.)</p>
+				}}>{window.i18n.gettext("Skip")}</button>
+				<p class="small">{window.i18n.gettext("(Several features will be unavailable while not logged in.)")}</p>
 				<!-- <p class="small">{(linkUrl == "wss://botserver.bettermeower.app/" && "Testing") || (linkUrl == "wss://api.meower.org/v0/cloudlink/" && "Main") || "Other"} Server ({linkUrl})</p> -->
 				<div>
-					<p class="small">BetterMeower Classic v1.0 (Based on BetterMeower v1.5.0)</p>
+					<p class="small">{window.i18n.gettext("BetterMeower Classic v1.0 (Based on BetterMeower v1.5.0)")}</p>
 					<img
 						src={meowy}
 						alt=""
@@ -248,7 +248,7 @@
 		</div>
 	{:else if $page === "login"}
 		<div class="fullcenter">
-			<h1>Login to BetterMeower</h1>
+			<h1>{window.i18n.gettext("Login to BetterMeower")}</h1>
 
 			<form class="column-ui"
 				on:submit|preventDefault={e => {
@@ -264,12 +264,12 @@
 					return false;
 				}}
 			>
-				<input type="text" placeholder="Username" maxlength="20">
-				<input type="password" placeholder="Password" maxlength="255">
+				<input type="text" placeholder={window.i18n.gettext("Username")} maxlength="20">
+				<input type="password" placeholder={window.i18n.gettext("Password")} maxlength="255">
 				<p class="checkboxes">
 					<input id="remember-me" type="checkbox" bind:checked={rememberMe}>
 					<label for="remember-me">
-						Save this login
+						{window.i18n.gettext("Save this login")}
 					</label>
 				</p>
 				<span class="login-status">{loginStatus}</span>
