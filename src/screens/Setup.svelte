@@ -150,11 +150,11 @@
 
 				switch (code) {
 					case "E:103 | ID not found":
-						loginStatus = "Invalid username!";
+						loginStatus = window.i18n.gettext("Invalid username!");
 						console.error("Account doesn't exist, not logging in");
 						break;
 					case "I:011 | Invalid Password":
-						loginStatus = "Invalid password!";
+						loginStatus = window.i18n.gettext("Invalid password!");
 						console.error("Password is incorrect, not logging in");
 						break;
 					case "E:018 | Account Banned":
@@ -164,11 +164,11 @@
 						console.error("Account is banned, not logging in");
 						break;
 					case "E:019 | Illegal characters detected":
-						loginStatus = "Usernames must not have spaces or other special characters!";
+						loginStatus = window.i18n.gettext("Usernames must not have spaces or other special characters!");
 						console.error("Invalid username, not creating account");
 						break;
 					case "E:106 | Too many requests":
-						loginStatus = "Too many requests! Please try again later.";
+						loginStatus = window.i18n.gettext("Too many requests! Please try again later.");
 						console.error("Too many requests! Not performing signup/login");
 						break;
 					default:
@@ -191,7 +191,7 @@
 				<div class="logo top" bind:this={logo}>
 					<img
 						bind:this={logoImg}
-						alt="Meower"
+						alt="BetterMeower"
 						src={meowerLogo}
 						class="logo-img"
 						height="40"
@@ -225,7 +225,7 @@
 							localStorage.getItem("meower_savedusername"),
 							localStorage.getItem("meower_savedpassword"),
 						)
-					}}>{window.i18n.gettext("Use saved login (%d)", localStorage.getItem("meower_savedusername"))}</button>
+					}}>{window.i18n.gettext("Use saved login")} (localStorage.getItem("meower_savedusername"))})</button>
 					<p class="small">{loginStatus}</p>
 				{/if}
 				<button on:click={() => {
@@ -280,26 +280,26 @@
 						console.log("User cancelled login");
 						return false;
 					}}>Go back</button>
-					<button type="submit">Login</button>
+					<button type="submit">{window.i18n.gettext("Log in")}</button>
 				</div>
-				<p><i>BetterMeower Classic never saves your username and password to external servers. Your data is encrypted and is only ever sent to the Meower Server.</i></p>
+				<p><i>{window.i18n.gettext("BetterMeower Classic never saves your username and password to external servers. Your data is encrypted and is only ever sent to the Meower Server.")}</i></p>
 			</form>
 		</div>
 	{:else if $page === "join"}
 		<div class="fullcenter">
-			<h1>Create a Meower Account</h1>
+			<h1>{window.i18n.gettext("Create a Meower Account")}</h1>
 
 			<form class="column-ui"
 				on:submit|preventDefault={e => {
 					const username = e.target[0].value;
 					const password = e.target[1].value;
 					if (!(username && password)) {
-						loginStatus = "You must specify a username and a password to create an account!";
+						loginStatus = window.i18n.gettext("You must specify a username and a password to create an account!");
 						console.error("User did not provide username and/or password, not creating account");
 					return false;
 					}
 
-					loginStatus = "Creating account..."
+					loginStatus = window.i18n.gettext("Creating account...")
 
 					clm.meowerRequest({
 						cmd: "direct",
@@ -313,7 +313,7 @@
 						listener: "join",
 					}).then(async val => {
 						if (val.mode === "auth" && val.payload.username === username) {
-							loginStatus = "Getting user data...";
+							loginStatus = window.i18n.gettext("Getting user data...");
 							const profileVal = await clm.meowerRequest({
 								cmd: "direct",
 								val: {
@@ -349,11 +349,11 @@
 					}).catch(code => {
 						switch (code) {
 							case "I:015 | Account exists":
-								loginStatus = "That username already exists!";
+								loginStatus = window.i18n.gettext("That username already exists!");
 								console.error("Account already exists, can't create it again");
 								break;
 							case "I:011 | Invalid Password":
-								loginStatus = "Invalid password!";
+								loginStatus = window.i18n.gettext("Invalid password!");
 								console.error("Password is invalid, not creating account");
 								break;
 							case "E:119 | IP Blocked":
@@ -363,11 +363,11 @@
 								console.error("IP address is blocked from creating accounts, cannot create one");
 								break;
 							case "E:019 | Illegal characters detected":
-								loginStatus = "Usernames must not have spaces or other special characters!";
+								loginStatus = window.i18n.gettext("Usernames must not have spaces or other special characters!");
 								console.error("Username contained invalid characters, not creating");
 								break;
 							case "E:106 | Too many requests":
-								loginStatus = "Too many requests! Please try again later.";
+								loginStatus = window.i18n.gettext("Too many requests! Please try again later.");
 								console.error("Too many requests! Not creating account");
 								break;
 							default:
@@ -381,14 +381,14 @@
 				<p class="checkboxes">
 					<input id="remember-me" type="checkbox" bind:checked={rememberMe}>
 					<label for="remember-me">
-						Save this login
+						{window.i18n.gettext("Save this login")}
 					</label>
 					<br />
 					<input id="accept-terms" type="checkbox" bind:checked={acceptTerms}>
 					<label for="accept-terms">
-						I agree to <a
+						{window.i18n.gettext("I agree to")} <a
 							href="https://meower.org/legal" target="_blank" rel="noreferrer"
-						>Meower's Terms of Service and Privacy Policy</a>
+						>{window.i18n.gettext("Meower's Terms of Service and Privacy Policy")}</a>
 					</label>
 				</p>
 				<span class="login-status">{loginStatus}</span>
@@ -399,24 +399,24 @@
 						console.log("User cancelled account creation");
 						return false;
 					}}>Go back</button>
-					<button type="submit" disabled={!acceptTerms}>Join Meower!</button>
+					<button type="submit" disabled={!acceptTerms}>{winodw.i18n.gettext("Join Meower!")}</button>
 				</div>
 			</form>
 		</div>
 	{:else if $page === "blank"}
 		<div></div>
 	{:else if $page === "go"}
-		<div class="fullcenter">Let's go!</div>
+		<div class="fullcenter">{window.i18n.gettext("Let's go!")}</div>
 	{:else}
 		<div class="fullcenter">
 			<div class="column-ui">
 				<script>console.error("User went to a page that does not exist");</script>
-				Somehow, you got to a page that doesn't exist...
+				{window.i18n.gettext("Somehow, you got to a page that doesn't exist...")}
 				<br />
-				(Current page: {$page})
+				({window.i18n.gettext("Current page")}: {$page})
 
 				<div class="buttons">
-					<button on:click={()=>page.set("logo")}>Go back!</button>
+					<button on:click={()=>page.set("logo")}>{window.i18n.gettext("Go back")}</button>
 				</div>
 			</div>
 		</div>
