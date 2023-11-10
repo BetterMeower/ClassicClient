@@ -97,7 +97,7 @@ IS NEEDED FOR THE TRANSITION TO WORK
 			<div slot="default">
 				<p>
 					{#if $disconnectReason === ""}
-						Something went wrong and the connection to Meower was lost. (Note: Meower API is in under attack mode right now! If this erorr continues, please go to https://api.meower.org and complete the Cloudflare captcha.)
+						Something went wrong and the connection to Meower was lost. (Note: Meower API is in under attack mode right now! If this error continues, please go to https://api.meower.org and complete the Cloudflare captcha.)
 					{:else if $disconnectReason === "Failed to load userdata"}
 						An unexpected error occurred while trying to load your userdata! Check console for more information.
 					{:else if $disconnectReason === "E:119 | IP Blocked"}
