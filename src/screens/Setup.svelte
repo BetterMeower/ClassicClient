@@ -72,6 +72,13 @@
 				console.log("Connecting to Meower server...");
 				await connect();
 
+				// Replace "dev" in variable name with release when releasing as main
+				// Change variable name to name relevant with the news page's subject.
+				if (localStorage.getItem("deprecated-warning") === null) {
+							$modalPage = "NewsModal";
+							$modalShown = true;
+						}
+
 				if (localStorage.getItem("meower_savedusername") && localStorage.getItem("meower_savedpassword")) {
 					doLogin(localStorage.getItem("meower_savedusername"), localStorage.getItem("meower_savedpassword"), true);
 				} else {
